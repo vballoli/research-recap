@@ -38,4 +38,4 @@ This means the tools you use(IDE, software, hardware) etc. is something you shou
 1. Not a lot of time is spent on setup (at the start of the project) and publishing (at the end of the project)
 2. Working within a comfortable zone of tools ensures productivity and consistency.
 
-My [dev setup]({% postpost_url 2022-07-12-shortcuts %}) is a culmination of mostly research and some non-research tools that is mostly oriented towards working on Windows based local machines with WSL and Linux machines with GPUs. 
+My [dev setup]({% post_url 2022-07-12-shortcuts %}) is a culmination of mostly research and some non-research tools that is mostly oriented towards working on Windows based local machines with WSL and Linux machines with GPUs. 
