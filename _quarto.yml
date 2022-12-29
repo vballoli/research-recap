@@ -1,0 +1,37 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Research Recap"
+  reader-mode: true
+  navbar:
+    search: true
+    left:
+      - about.qmd
+    right:
+      - icon: github
+        href: https://github.com/vballoli
+      - icon: twitter
+        href: https://twitter.com/v_balloli
+      - icon: globe
+        href: https://vballoli.github.io
+      - icon: book
+        href: https://vballoli.com
+      - icon: envelope-open
+        href: mailto:balloli.vb@gmail.com
+      - icon: rss
+        href: index.xml
+  twitter-card: true
+  google-analytics: "G-35WV1WKM7Q"
+  page-navigation: true
+  page-footer: 
+    center: "Copyright 2023, Vaibhav Balloli" 
+
+format:
+  html:
+    theme: cyborg
+    css: styles.css
+
+
+
