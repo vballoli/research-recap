@@ -1,0 +1,44 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About Me",
+    "section": "",
+    "text": "About this blog"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Research Recap",
+    "section": "",
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\nLessons from writing Research Code\n\n\n\n\n\n\n\ncode\n\n\nsetup\n\n\nresearch\n\n\n\n\n\n\n\n\n\n\n\nAug 15, 2022\n\n\nVaibhav Balloli\n\n\n\n\n\n\n\n\nDevelopment Setup\n\n\n\n\n\n\n\ncode\n\n\nsetup\n\n\n\n\n\n\n\n\n\n\n\nJul 12, 2022\n\n\nVaibhav Balloli\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/dev-setup/index.html",
+    "href": "posts/dev-setup/index.html",
+    "title": "Development Setup",
+    "section": "",
+    "text": "My programming language of choice has mostly been Python lately, with dev both on Linux and Windows (and WSL) - both when I’m working on personal and professional projects. While some of it keeps me awake for quite a long time based on the criticality of the project, it becomes essential that the tools and commands I use are handy, ubiquitous and uniform across my machines. This post showcases some of these and will be updated continuously."
+  },
+  {
+    "objectID": "posts/dev-setup/index.html#libraries-and-frameworks",
+    "href": "posts/dev-setup/index.html#libraries-and-frameworks",
+    "title": "Development Setup",
+    "section": "Libraries and Frameworks",
+    "text": "Libraries and Frameworks\n\nNumba - makes things go vroom.\nFastcore - reduces regular boilerplate by quite a lot.\nStreamlit - host dashboard to present to multiple people asynchronously and remotely.\nRay - large scale distributed code.\nDask - host cluster on remote machines and send compute to these clusters. fast pandas alternative\nSphinx - build and host documentation\nFastAPI - web framework of choice\nPostgreSQL - database of choice\nsqlalchemy - ORM of choice\nHydra - config management\nWandb/mlflow - experiment tracker personal/professional"
+  },
+  {
+    "objectID": "posts/research-code/index.html",
+    "href": "posts/research-code/index.html",
+    "title": "Lessons from writing Research Code",
+    "section": "",
+    "text": "Having written a good amount of research code for a while now, I was wondering what “good research code” can be construed as. This topic has been discussed heavily with a lot of good blog posts and materials on the internet (some I’ve found: Hongyuan Mei’s blog, Good Research Code Handbook, etc.). Personally, I have a checklist of things that potrays my version of the basic requirements of good research code, in the context of ease of use for other researchers/practioners:\nSpecial note: A good documentation in my observation(see point 2. above) has immensely helped me in navigating relatively new fields of research, particularly in Machine Learning."
+  },
+  {
+    "objectID": "posts/research-code/index.html#but-why-invest-additional-time-in-this",
+    "href": "posts/research-code/index.html#but-why-invest-additional-time-in-this",
+    "title": "Lessons from writing Research Code",
+    "section": "But why invest additional time in this ?",
+    "text": "But why invest additional time in this ?\nThe recent trend suggests that most research code goes through multiple phases:\n\nQuick, dirty implementation of the idea in mind\nWrite scripts to get results\nMake code public\n\nIdeally, it should be something like this:\n\nQuick, dirty implementation of the idea in mind.\nTidy code, structured implementation of both the boiler plate, previous work and the core contribution.\nWrite reproducible scripts and automate most metric collection, results charting and documentation to reduce manual work.\nOnce code goes public, spending some time in maintaining/addressing user issues.\n\nYou’ll notice it’s the second point that differentiates between good and terrible practices - tidying up code at the right time. Given the results of the quick prototype that backed your idea, it’s clear that you’ll be investing a good portion of your time diving deep into all the nuances of this prototype. This means there should be more research and less manual work. What manual work refers to here is often times bad code can result in a lot of manual work of coarsing through csvs, logs, metadata, and other things that shifts the focus from research to running scripts manually.\nThis means the tools you use(IDE, software, hardware) etc. is something you should be familiar with, mostly from previous experience on other projects. This ensures that: 1. Not a lot of time is spent on setup (at the start of the project) and publishing (at the end of the project) 2. Working within a comfortable zone of tools ensures productivity and consistency.\nMy dev setup is a culmination of mostly research and some non-research tools that is mostly oriented towards working on Windows based local machines with WSL and Linux machines with GPUs."
+  }
+]
