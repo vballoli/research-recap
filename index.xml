@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Research Recap</title>
+<link>https://vballoli.github.io/research-blog/index.html</link>
+<atom:link href="https://vballoli.github.io/research-blog/index.xml" rel="self" type="application/rss+xml"/>
+<description>Collection of blog posts summarizing ML research</description>
+<generator>quarto-1.2.280</generator>
+<lastBuildDate>Sun, 14 Aug 2022 18:30:00 GMT</lastBuildDate>
+<item>
+  <title>Lessons from writing Research Code</title>
+  <dc:creator>Vaibhav Balloli</dc:creator>
+  <link>https://vballoli.github.io/research-blog/posts/research-code/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Having written a good amount of research code for a while now, I was wondering what “good research code” can be construed as. This topic has been discussed heavily with a lot of good blog posts and materials on the internet (some I’ve found: <a href="https://www.hongyuanmei.com/blog/2021/researchcodebasics/">Hongyuan Mei’s blog</a>, <a href="https://goodresearch.dev/">Good Research Code Handbook</a>, etc.). Personally, I have a checklist of things that potrays my version of the basic requirements of good research code, in the context of ease of use for other researchers/practioners:</p>
+<ol type="1">
+<li>Clear directory, functional structure to all the different contributions of the research code.</li>
+<li>Simple docs to guide researchers who want to reproduce/modify certain parts of the pipeline (certainly helpful with docstrings hosted on <a href="https://readthedocs.org">ReadTheDocs</a>).</li>
+<li>Clear README to include instructions to run, cite, and contact-info authors</li>
+<li>LICENSE File(specially when working at industrial labs)</li>
+<li>Docker images for quick implementation</li>
+<li>Code/tutorials to fiddle with and generate the plots of the experiments.</li>
+</ol>
+<p>Special note: A good documentation in my observation(see point 2. above) has immensely helped me in navigating relatively new fields of research, particularly in Machine Learning.</p>
+<section id="but-why-invest-additional-time-in-this" class="level2">
+<h2 class="anchored" data-anchor-id="but-why-invest-additional-time-in-this">But why invest additional time in this ?</h2>
+<p>The recent trend suggests that most research code goes through multiple phases:</p>
+<ol type="1">
+<li>Quick, dirty implementation of the idea in mind</li>
+<li>Write scripts to get results</li>
+<li>Make code public</li>
+</ol>
+<p>Ideally, it should be something like this:</p>
+<ol type="1">
+<li>Quick, dirty implementation of the idea in mind.</li>
+<li>Tidy code, structured implementation of both the boiler plate, previous work and the core contribution.</li>
+<li>Write reproducible scripts and automate most metric collection, results charting and documentation to reduce manual work.</li>
+<li>Once code goes public, spending some time in maintaining/addressing user issues.</li>
+</ol>
+<p>You’ll notice it’s the second point that differentiates between good and terrible practices - tidying up code at the right time. Given the results of the quick prototype that backed your idea, it’s clear that you’ll be investing a good portion of your time diving deep into all the nuances of this prototype. This means there should be more research and <strong>less manual work</strong>. What manual work refers to here is often times bad code can result in a lot of manual work of coarsing through csvs, logs, metadata, and other things that shifts the focus from research to running scripts manually.</p>
+<p>This means the tools you use(IDE, software, hardware) etc. is something you should be familiar with, mostly from previous experience on other projects. This ensures that: 1. Not a lot of time is spent on setup (at the start of the project) and publishing (at the end of the project) 2. Working within a comfortable zone of tools ensures productivity and consistency.</p>
+<p>My <a href="../../posts/dev-setup/index.html">dev setup</a> is a culmination of mostly research and some non-research tools that is mostly oriented towards working on Windows based local machines with WSL and Linux machines with GPUs.</p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{balloli2022,
+  author = {Vaibhav Balloli},
+  title = {Lessons from Writing {Research} {Code}},
+  date = {2022-08-15},
+  url = {https://vballoli.github.io/research-blog//posts/research-code},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-balloli2022" class="csl-entry quarto-appendix-citeas">
+Vaibhav Balloli. 2022. <span>“Lessons from Writing Research
+Code.”</span> August 15, 2022. <a href="https://vballoli.github.io/research-blog//posts/research-code">https://vballoli.github.io/research-blog//posts/research-code</a>.
+</div></div></section></div> ]]></description>
+  <category>code</category>
+  <category>setup</category>
+  <category>research</category>
+  <guid>https://vballoli.github.io/research-blog/posts/research-code/index.html</guid>
+  <pubDate>Sun, 14 Aug 2022 18:30:00 GMT</pubDate>
+</item>
+<item>
+  <title>Development Setup</title>
+  <dc:creator>Vaibhav Balloli</dc:creator>
+  <link>https://vballoli.github.io/research-blog/posts/dev-setup/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>My programming language of choice has mostly been Python lately, with dev both on Linux and Windows (and WSL) - both when I’m working on personal and professional projects. While some of it keeps me awake for quite a long time based on the criticality of the project, it becomes essential that the tools and commands I use are handy, ubiquitous and uniform across my machines. This post showcases some of these and will be updated continuously.</p>
+<section id="key-principles" class="level1">
+<h1>Key Principles</h1>
+<ol type="1">
+<li>Most of my setup follows some of the key learnings I’ve had here, <a href="../../posts/research-code/index.html">here</a>.</li>
+</ol>
+</section>
+<section id="bashrc" class="level1">
+<h1>.bashrc</h1>
+<p>{% include info.html text=“Appended to the end of file.” %}</p>
+<p>Pre-req: <code>pip install gpustat</code> (for gpu machines only)</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="bu" style="color: null;">alias</span> dc=<span class="st" style="color: #20794D;">'docker-compose'</span></span>
+<span id="cb1-2"><span class="bu" style="color: null;">alias</span> dbuild=<span class="st" style="color: #20794D;">'docker build . -t'</span></span>
+<span id="cb1-3"><span class="bu" style="color: null;">alias</span> sbc=<span class="st" style="color: #20794D;">'source ~/.bashrc'</span></span>
+<span id="cb1-4"><span class="fu" style="color: #4758AB;">addalias()</span> <span class="kw" style="color: #003B4F;">{</span></span>
+<span id="cb1-5">    <span class="bu" style="color: null;">echo</span> <span class="st" style="color: #20794D;">"alias </span><span class="va" style="color: #111111;">${1}</span><span class="st" style="color: #20794D;">"</span> <span class="op" style="color: #5E5E5E;">&gt;&gt;</span> <span class="va" style="color: #111111;">$HOME</span>/.bash_aliases</span>
+<span id="cb1-6"><span class="kw" style="color: #003B4F;">}</span> <span class="co" style="color: #5E5E5E;">#Source: https://unix.stackexchange.com/a/153978</span></span>
+<span id="cb1-7"></span>
+<span id="cb1-8"><span class="bu" style="color: null;">alias</span> conda-dump=<span class="st" style="color: #20794D;">'conda env export --no-builds | grep -v "^prefix: " &gt; environment.yml'</span> <span class="co" style="color: #5E5E5E;">#dumps conda environment to environment.yml</span></span>
+<span id="cb1-9"></span>
+<span id="cb1-10"><span class="bu" style="color: null;">alias</span> gpuwatch=<span class="st" style="color: #20794D;">'gpustat -i 5 -p'</span></span>
+<span id="cb1-11"><span class="bu" style="color: null;">alias</span> killgpuproc=<span class="st" style="color: #20794D;">'nvidia-smi | grep "python" | awk "{ print $5 }" | xargs -n1 kill -9'</span></span>
+<span id="cb1-12"><span class="bu" style="color: null;">alias</span> killcpuproc=<span class="st" style="color: #20794D;">'ps aux | grep "python" | awk "{ print $5 }" | xargs -n1 kill -9'</span></span>
+<span id="cb1-13"></span>
+<span id="cb1-14"><span class="bu" style="color: null;">alias</span> wandbstop=<span class="st" style="color: #20794D;">'wandb disabled'</span> <span class="co" style="color: #5E5E5E;">#for debugging</span></span></code></pre></div>
+<blockquote class="blockquote">
+<p><code>addalias</code> is particularly useful to quickly shift to projects in different folders.</p>
+</blockquote>
+</section>
+<section id="python" class="level1">
+<h1>Python</h1>
+<section id="libraries-and-frameworks" class="level2">
+<h2 class="anchored" data-anchor-id="libraries-and-frameworks">Libraries and Frameworks</h2>
+<ol type="1">
+<li><a href="https://numba.pydata.org/">Numba</a> - makes things go vroom.</li>
+<li><a href="https://github.com/fastai/fastcore">Fastcore</a> - reduces regular boilerplate by quite a lot.</li>
+<li><a href="https://streamlit.io">Streamlit</a> - host dashboard to present to multiple people asynchronously and remotely.</li>
+<li><a href="https://ray.io">Ray</a> - large scale distributed code.</li>
+<li><a href="https://dask.org">Dask</a> - host cluster on remote machines and send compute to these clusters. fast pandas alternative</li>
+<li><a href="https://www.sphinx-doc.org/en/master/">Sphinx</a> - build and host documentation</li>
+<li><a href="https://fastapi.tiangolo.com/">FastAPI</a> - web framework of choice</li>
+<li><a href="https://postgresql.org">PostgreSQL</a> - database of choice</li>
+<li><a href="https://sqlalchemy.org">sqlalchemy</a> - ORM of choice</li>
+<li><a href="https://hydra.cc">Hydra</a> - config management</li>
+<li><a href="https://wandb.ai">Wandb</a>/<a href="https://mlflow.org">mlflow</a> - experiment tracker personal/professional</li>
+</ol>
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{balloli2022,
+  author = {Vaibhav Balloli},
+  title = {Development {Setup}},
+  date = {2022-07-12},
+  url = {https://vballoli.github.io/research-blog//posts/dev-setup},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-balloli2022" class="csl-entry quarto-appendix-citeas">
+Vaibhav Balloli. 2022. <span>“Development Setup.”</span> July 12, 2022.
+<a href="https://vballoli.github.io/research-blog//posts/dev-setup">https://vballoli.github.io/research-blog//posts/dev-setup</a>.
+</div></div></section></div> ]]></description>
+  <category>code</category>
+  <category>setup</category>
+  <guid>https://vballoli.github.io/research-blog/posts/dev-setup/index.html</guid>
+  <pubDate>Mon, 11 Jul 2022 18:30:00 GMT</pubDate>
+</item>
+</channel>
+</rss>
