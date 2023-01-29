@@ -23,15 +23,19 @@ website:
       - icon: rss
         href: index.xml
   twitter-card: true
-  google-analytics: "G-35WV1WKM7Q"
+  google-analytics:
+    tracking-id: "G-35WV1WKM7Q"
+    anonymize-ip: true
+  cookie-consent:
+    style: simple 
+    palette: light  
   page-navigation: true
   page-footer: 
     center: "Copyright 2023, Vaibhav Balloli" 
 
 format:
   html:
-    theme: cyborg
+    theme: flatly
     css: styles.css
-
 
 
