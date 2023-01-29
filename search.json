@@ -4,14 +4,14 @@
     "href": "about.html",
     "title": "About Me",
     "section": "",
-    "text": "Hi, I’m Vaibhav Balloli, a Research Fellow at Microsoft Research, India. I work in optimization and reinforcement learning. Please learn more here on my academic website. If you’ve liked my writing, do consider visiting my personal blog, you might never know what random thoughts you and I have had. Also, feel free to reach out to me via e-mail or any of the above social media hovering on the header."
+    "text": "About this blog"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Research Recap",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\nLessons from writing Research Code\n\n\n\n\n\n\n\ncode\n\n\nsetup\n\n\nresearch\n\n\n\n\n\n\n\n\n\n\n\nAug 15, 2022\n\n\nVaibhav Balloli\n\n\n\n\n\n\n\n\nDevelopment Setup\n\n\n\n\n\n\n\ncode\n\n\nsetup\n\n\n\n\n\n\n\n\n\n\n\nJul 12, 2022\n\n\nVaibhav Balloli\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\nOffline Reinforcement Learning\n\n\n\n\n\n\n\nRL\n\n\n\n\n\n\n\n\n\n\n\nJan 28, 2023\n\n\nVaibhav Balloli\n\n\n\n\n\n\n\n\nLessons from writing Research Code\n\n\n\n\n\n\n\ncode\n\n\nsetup\n\n\nresearch\n\n\n\n\n\n\n\n\n\n\n\nAug 15, 2022\n\n\nVaibhav Balloli\n\n\n\n\n\n\n\n\nDevelopment Setup\n\n\n\n\n\n\n\ncode\n\n\nsetup\n\n\n\n\n\n\n\n\n\n\n\nJul 12, 2022\n\n\nVaibhav Balloli\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/dev-setup/index.html",
@@ -26,6 +26,13 @@
     "title": "Development Setup",
     "section": "Libraries and Frameworks",
     "text": "Libraries and Frameworks\n\nNumba - makes things go vroom.\nFastcore - reduces regular boilerplate by quite a lot.\nStreamlit - host dashboard to present to multiple people asynchronously and remotely.\nRay - large scale distributed code.\nDask - host cluster on remote machines and send compute to these clusters. fast pandas alternative\nSphinx - build and host documentation\nFastAPI - web framework of choice\nPostgreSQL - database of choice\nsqlalchemy - ORM of choice\nHydra - config management\nWandb/mlflow - experiment tracker personal/professional"
+  },
+  {
+    "objectID": "posts/offline-rl/index.html",
+    "href": "posts/offline-rl/index.html",
+    "title": "Offline Reinforcement Learning",
+    "section": "",
+    "text": "Reinforcement Learning(RL), as simply stated in Sutton and Barto Sutton and Barto (2018) , is learning what to do i.e map situations to actions to maximize the cumulative reward for a series of steps. Naturally, trial and error is at the core of Reinforcement Learning i.e. RL learns in a hands-on approach exploring and exploiting its task, which is referred to as online learning, where online refers to agent manipulating the surroundings around it(commonly referred to as an Environment) with the available controls it has(referred to as actions). While such approaches have been popular and successful in many tasks, they often rely on continually improving the ability to search better and learn on the go, which does not translate well to tasks where the ability to explore the environment comes with a cost, which harms the ability of most state-of-the-art algorithms to learn. Hence, Offline Reinforcement Learning is a paradigm within RL that is tasked to learn optimal behaviour from a static dataset i.e. the available data is fixed and cannot be controlled, as it is often generated from an external agent. The figure below illustrates the key difference between traditional RL and offline RL.\n\n\n\nIllustration of Traditional RL interactions vs Offline RL(credit: Offline RL NeurIPS )\n\n\nIn this post, I cover some popular algorithms and code excerpts that help understand some of the implementation details regarding these algorithms to provide the intuition of how they work. For more documentation on how to run these algorithms, you can check out my repository that implements these algorithms in detail at Offlax:\n\n\nConservative Q-Learning(CQL) builds on top of existing algorithms like QR-DQN(for discrete action spaces) and SAC(for continuous action spaces). As the paper suggests, CQL only requires 20 lines of additional code over the existing RL algorithms like QR-DQN and SAC.\n\n\n\nBehavior cloning is a widely used techniques to for agents to learn from an expert i.e. trying to understand based on an expert agent’s trajectory. This paper suggests using Behavior Cloning with some adjustments over an existing RL algorithm like TD3 to learn in from a static dataset of trajectories."
   },
   {
     "objectID": "posts/research-code/index.html",

@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://vballoli.github.io/research-blog/about.html</loc>
-    <lastmod>2022-12-29T23:24:31.377Z</lastmod>
+    <loc>https://vballoli.github.io/research-recap/about.html</loc>
+    <lastmod>2023-01-29T19:35:47.740Z</lastmod>
   </url>
   <url>
-    <loc>https://vballoli.github.io/research-blog/index.html</loc>
-    <lastmod>2022-12-29T23:24:31.807Z</lastmod>
+    <loc>https://vballoli.github.io/research-recap/index.html</loc>
+    <lastmod>2023-01-29T19:35:48.526Z</lastmod>
   </url>
   <url>
-    <loc>https://vballoli.github.io/research-blog/posts/dev-setup/index.html</loc>
-    <lastmod>2022-12-29T23:24:32.347Z</lastmod>
+    <loc>https://vballoli.github.io/research-recap/posts/dev-setup/index.html</loc>
+    <lastmod>2023-01-29T19:35:49.257Z</lastmod>
   </url>
   <url>
-    <loc>https://vballoli.github.io/research-blog/posts/research-code/index.html</loc>
-    <lastmod>2022-12-29T23:24:32.909Z</lastmod>
+    <loc>https://vballoli.github.io/research-recap/posts/offline-rl/index.html</loc>
+    <lastmod>2023-01-29T19:35:50.008Z</lastmod>
+  </url>
+  <url>
+    <loc>https://vballoli.github.io/research-recap/posts/research-code/index.html</loc>
+    <lastmod>2023-01-29T19:35:50.727Z</lastmod>
   </url>
 </urlset>

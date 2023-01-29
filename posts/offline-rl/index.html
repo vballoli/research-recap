@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vaibhav Balloli">
-<meta name="dcterms.date" content="2022-08-15">
+<meta name="dcterms.date" content="2023-01-28">
 
-<title>Research Recap - Lessons from writing Research Code</title>
+<title>Research Recap - Offline Reinforcement Learning</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,25 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
+}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
 }
 </style>
 
@@ -90,8 +109,8 @@ cookieconsent.run({
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta name="twitter:title" content="Research Recap - Lessons from writing Research Code">
-<meta name="twitter:description" content="Having written a good amount of research code for a while now, I was wondering what “good research code” can be construed as.">
+<meta name="twitter:title" content="Research Recap - Offline Reinforcement Learning">
+<meta name="twitter:description" content="Reinforcement Learning(RL), as simply stated in Sutton and Barto Sutton and Barto (2018) , is learning what to do i.e map situations to actions to maximize the cumulative reward for a series of steps.">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -164,11 +183,9 @@ cookieconsent.run({
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Lessons from writing Research Code</h1>
+      <h1 class="title">Offline Reinforcement Learning</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">code</div>
-                <div class="quarto-category">setup</div>
-                <div class="quarto-category">research</div>
+                <div class="quarto-category">RL</div>
               </div>
                   </div>
   </div>
@@ -186,7 +203,7 @@ cookieconsent.run({
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 15, 2022</p>
+        <p class="date">January 28, 2023</p>
       </div>
     </div>
     
@@ -202,7 +219,11 @@ cookieconsent.run({
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#but-why-invest-additional-time-in-this" id="toc-but-why-invest-additional-time-in-this" class="nav-link active" data-scroll-target="#but-why-invest-additional-time-in-this">But why invest additional time in this ?</a></li>
+  <li><a href="#offline-reinforcement-learning" id="toc-offline-reinforcement-learning" class="nav-link active" data-scroll-target="#offline-reinforcement-learning">Offline Reinforcement Learning</a>
+  <ul class="collapse">
+  <li><a href="#conservative-q-learning-kumar2020conservative" id="toc-conservative-q-learning-kumar2020conservative" class="nav-link" data-scroll-target="#conservative-q-learning-kumar2020conservative">Conservative Q-Learning <span class="citation" data-cites="kumar2020conservative">Kumar et al. (2020)</span></a></li>
+  <li><a href="#td3-behavior-cloning-fujimoto2021minimalist" id="toc-td3-behavior-cloning-fujimoto2021minimalist" class="nav-link" data-scroll-target="#td3-behavior-cloning-fujimoto2021minimalist">TD3 + Behavior Cloning <span class="citation" data-cites="fujimoto2021minimalist">Fujimoto and Gu (2021)</span></a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -212,48 +233,49 @@ cookieconsent.run({
 
 
 
-<p>Having written a good amount of research code for a while now, I was wondering what “good research code” can be construed as. This topic has been discussed heavily with a lot of good blog posts and materials on the internet (some I’ve found: <a href="https://www.hongyuanmei.com/blog/2021/researchcodebasics/">Hongyuan Mei’s blog</a>, <a href="https://goodresearch.dev/">Good Research Code Handbook</a>, etc.). Personally, I have a checklist of things that potrays my version of the basic requirements of good research code, in the context of ease of use for other researchers/practioners:</p>
-<ol type="1">
-<li>Clear directory, functional structure to all the different contributions of the research code.</li>
-<li>Simple docs to guide researchers who want to reproduce/modify certain parts of the pipeline (certainly helpful with docstrings hosted on <a href="https://readthedocs.org">ReadTheDocs</a>).</li>
-<li>Clear README to include instructions to run, cite, and contact-info authors</li>
-<li>LICENSE File(specially when working at industrial labs)</li>
-<li>Docker images for quick implementation</li>
-<li>Code/tutorials to fiddle with and generate the plots of the experiments.</li>
-</ol>
-<p>Special note: A good documentation in my observation(see point 2. above) has immensely helped me in navigating relatively new fields of research, particularly in Machine Learning.</p>
-<section id="but-why-invest-additional-time-in-this" class="level2">
-<h2 class="anchored" data-anchor-id="but-why-invest-additional-time-in-this">But why invest additional time in this ?</h2>
-<p>The recent trend suggests that most research code goes through multiple phases:</p>
-<ol type="1">
-<li>Quick, dirty implementation of the idea in mind</li>
-<li>Write scripts to get results</li>
-<li>Make code public</li>
-</ol>
-<p>Ideally, it should be something like this:</p>
-<ol type="1">
-<li>Quick, dirty implementation of the idea in mind.</li>
-<li>Tidy code, structured implementation of both the boiler plate, previous work and the core contribution.</li>
-<li>Write reproducible scripts and automate most metric collection, results charting and documentation to reduce manual work.</li>
-<li>Once code goes public, spending some time in maintaining/addressing user issues.</li>
-</ol>
-<p>You’ll notice it’s the second point that differentiates between good and terrible practices - tidying up code at the right time. Given the results of the quick prototype that backed your idea, it’s clear that you’ll be investing a good portion of your time diving deep into all the nuances of this prototype. This means there should be more research and <strong>less manual work</strong>. What manual work refers to here is often times bad code can result in a lot of manual work of coarsing through csvs, logs, metadata, and other things that shifts the focus from research to running scripts manually.</p>
-<p>This means the tools you use(IDE, software, hardware) etc. is something you should be familiar with, mostly from previous experience on other projects. This ensures that: 1. Not a lot of time is spent on setup (at the start of the project) and publishing (at the end of the project) 2. Working within a comfortable zone of tools ensures productivity and consistency.</p>
-<p>My <a href="../../posts/dev-setup/index.html">dev setup</a> is a culmination of mostly research and some non-research tools that is mostly oriented towards working on Windows based local machines with WSL and Linux machines with GPUs.</p>
+<section id="offline-reinforcement-learning" class="level1">
+<h1>Offline Reinforcement Learning</h1>
+<p>Reinforcement Learning(RL), as simply stated in Sutton and Barto <span class="citation" data-cites="sutton2018reinforcement">Sutton and Barto (<a href="#ref-sutton2018reinforcement" role="doc-biblioref">2018</a>)</span> , is learning what to do i.e map situations to actions to maximize the cumulative reward for a series of steps. Naturally, trial and error is at the core of Reinforcement Learning i.e.&nbsp;RL learns in a hands-on approach exploring and exploiting its task, which is referred to as <em>online learning</em>, where <em>online</em> refers to agent manipulating the surroundings around it(commonly referred to as an Environment) with the available controls it has(referred to as actions). While such approaches have been popular and successful in many tasks, they often rely on continually improving the ability to search better and learn on the go, which does not translate well to tasks where the ability to explore the environment comes with a cost, which harms the ability of most state-of-the-art algorithms to learn. Hence, Offline Reinforcement Learning is a paradigm within RL that is tasked to learn optimal behaviour from a <strong>static</strong> dataset i.e.&nbsp;the available data is fixed and cannot be controlled, as it is often generated from an external agent. The figure below illustrates the key difference between traditional RL and offline RL.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://offline-rl.github.io/assets/OFFLINE_RL.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><sub><sup>Illustration of Traditional RL interactions vs Offline RL(credit: <a href="https://offline-rl-neurips.github.io">Offline RL NeurIPS</a> </sup></sub>)</figcaption><p></p>
+</figure>
+</div>
+<p>In this post, I cover some popular algorithms and code excerpts that help understand some of the implementation details regarding these algorithms to provide the intuition of how they work. For more documentation on how to run these algorithms, you can check out my repository that implements these algorithms in detail at <a href="https://github.com/vballoli/offlax">Offlax</a>:</p>
+<section id="conservative-q-learning-kumar2020conservative" class="level2">
+<h2 class="anchored" data-anchor-id="conservative-q-learning-kumar2020conservative">Conservative Q-Learning <span class="citation" data-cites="kumar2020conservative">Kumar et al. (<a href="#ref-kumar2020conservative" role="doc-biblioref">2020</a>)</span></h2>
+<p>Conservative Q-Learning(CQL) builds on top of existing algorithms like QR-DQN(for discrete action spaces) and SAC(for continuous action spaces). As the paper suggests, CQL only requires 20 lines of additional code over the existing RL algorithms like QR-DQN and SAC.</p>
+</section>
+<section id="td3-behavior-cloning-fujimoto2021minimalist" class="level2">
+<h2 class="anchored" data-anchor-id="td3-behavior-cloning-fujimoto2021minimalist">TD3 + Behavior Cloning <span class="citation" data-cites="fujimoto2021minimalist">Fujimoto and Gu (<a href="#ref-fujimoto2021minimalist" role="doc-biblioref">2021</a>)</span></h2>
+<p>Behavior cloning is a widely used techniques to for agents to learn from an expert i.e.&nbsp;trying to understand based on an expert agent’s trajectory. This paper suggests using Behavior Cloning with some adjustments over an existing RL algorithm like TD3 to learn in from a static dataset of trajectories.</p>
+
 
 
 </section>
+</section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{balloli2022,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-fujimoto2021minimalist" class="csl-entry" role="doc-biblioentry">
+Fujimoto, Scott, and Shixiang Shane Gu. 2021. <span>“A Minimalist Approach to Offline Reinforcement Learning.”</span> <em>Advances in Neural Information Processing Systems</em> 34: 20132–45.
+</div>
+<div id="ref-kumar2020conservative" class="csl-entry" role="doc-biblioentry">
+Kumar, Aviral, Aurick Zhou, George Tucker, and Sergey Levine. 2020. <span>“Conservative q-Learning for Offline Reinforcement Learning.”</span> <em>Advances in Neural Information Processing Systems</em> 33: 1179–91.
+</div>
+<div id="ref-sutton2018reinforcement" class="csl-entry" role="doc-biblioentry">
+Sutton, Richard S, and Andrew G Barto. 2018. <em>Reinforcement Learning: An Introduction</em>. MIT press.
+</div>
+</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{balloli2023,
   author = {Vaibhav Balloli},
-  title = {Lessons from Writing {Research} {Code}},
-  date = {2022-08-15},
-  url = {https://vballoli.github.io/research-recap//posts/research-code},
+  title = {Offline {Reinforcement} {Learning}},
+  date = {2023-01-28},
+  url = {https://vballoli.github.io/research-recap//posts/offline-rl},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-balloli2022" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
-Vaibhav Balloli. 2022. <span>“Lessons from Writing Research
-Code.”</span> August 15, 2022. <a href="https://vballoli.github.io/research-recap//posts/research-code">https://vballoli.github.io/research-recap//posts/research-code</a>.
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-balloli2023" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
+Vaibhav Balloli. 2023. <span>“Offline Reinforcement Learning.”</span>
+January 28, 2023. <a href="https://vballoli.github.io/research-recap//posts/offline-rl">https://vballoli.github.io/research-recap//posts/offline-rl</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
