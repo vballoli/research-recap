@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.313">
+<meta name="generator" content="quarto-1.2.280">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -269,6 +269,8 @@ cookieconsent.run({
   <li><a href="#python" id="toc-python" class="nav-link" data-scroll-target="#python">Python</a>
   <ul class="collapse">
   <li><a href="#libraries-and-frameworks" id="toc-libraries-and-frameworks" class="nav-link" data-scroll-target="#libraries-and-frameworks">Libraries and Frameworks</a></li>
+  <li><a href="#ray-and-ray-ecosystem" id="toc-ray-and-ray-ecosystem" class="nav-link" data-scroll-target="#ray-and-ray-ecosystem">Ray and Ray ecosystem</a></li>
+  <li><a href="#sphinx-and-boilerplate" id="toc-sphinx-and-boilerplate" class="nav-link" data-scroll-target="#sphinx-and-boilerplate">Sphinx and Boilerplate</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -284,6 +286,8 @@ cookieconsent.run({
 <h1>Key Principles</h1>
 <ol type="1">
 <li>Most of my setup follows some of the key learnings I’ve had here, <a href="../../posts/research-code/index.html">here</a>.</li>
+<li>Consistency is the key. Constantly using these tools helps avoid basic bugs you might encounter when starting new projects.</li>
+<li>Look around for updates once a year - it’s always helpful to see what the state of the art or people around you are using just in case it can make a substantial upgrade to your workflow.</li>
 </ol>
 </section>
 <section id="bashrc" class="level1">
@@ -325,6 +329,139 @@ cookieconsent.run({
 <li><a href="https://hydra.cc">Hydra</a> - config management</li>
 <li><a href="https://wandb.ai">Wandb</a>/<a href="https://mlflow.org">mlflow</a> - experiment tracker personal/professional</li>
 </ol>
+</section>
+<section id="ray-and-ray-ecosystem" class="level2">
+<h2 class="anchored" data-anchor-id="ray-and-ray-ecosystem">Ray and Ray ecosystem</h2>
+<p>Ray’s approach towards multiprocessing is something I find very intuitive and natural as opposed to doing everything by hand. I prefer using everything Ray: including the hyperparameter search library(Ray’s tune), RLLib for some standard RL stuff, etc. I highly suggest investing time in understanding Ray and surrounding concepts.</p>
+</section>
+<section id="sphinx-and-boilerplate" class="level2">
+<h2 class="anchored" data-anchor-id="sphinx-and-boilerplate">Sphinx and Boilerplate</h2>
+<p>The template below can be used very easily to write, build and host documentation and suggested for medium to large projects.</p>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">requirements.txt</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">conf.py</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<pre class="text"><code>breathe==4.30.0
+furo
+git+https://github.com/sphinx-contrib/video
+ipywidgets
+jupyter-sphinx
+myst-nb
+myst-parser
+nbsphinx
+pandoc
+sphinx
+sphinx-autobuild
+sphinx-book-theme
+sphinx-copybutton
+sphinx-design
+sphinx-proof
+sphinx-tabs
+sphinx-togglebutton
+sphinx_markdown_builder
+sphinxemoji
+sphinxcontrib-youtube
+pandoc</code></pre>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>sys.path.append(<span class="st">'../'</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Project information -----------------------------------------------------</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>project <span class="op">=</span> <span class="st">'&lt;Project Name&gt;'</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>copyright <span class="op">=</span> <span class="st">'&lt;ADD COPYRIGHT&gt;'</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>author <span class="op">=</span> <span class="st">'&lt;ADD AUTHORS&gt;'</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># The full version, including alpha/beta/rc tags</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>release <span class="op">=</span> <span class="st">'0.1'</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># -- General configuration ---------------------------------------------------</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Add any Sphinx extension module names here, as strings. They can be</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co"># extensions coming with Sphinx (named 'sphinx.ext.*') or your custom</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co"># ones.</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>extensions <span class="op">=</span> [</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sphinx.ext.autodoc"</span>,</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sphinx.ext.intersphinx"</span>,</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sphinx.ext.viewcode"</span>,</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sphinx.ext.doctest"</span>,</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sphinx.ext.autosummary"</span>,</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sphinx.ext.todo"</span>,</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sphinx.ext.coverage"</span>,</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sphinx.ext.mathjax"</span>,</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sphinx.ext.napoleon"</span>,</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sphinx.ext.autosectionlabel"</span>,</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sphinxemoji.sphinxemoji"</span>,</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">"breathe"</span>,</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sphinx_markdown_builder"</span>,</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sphinx_copybutton"</span>,</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    <span class="st">"jupyter_sphinx"</span>,</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>    <span class="co"># "myst_nb",</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>    <span class="st">"myst_parser"</span>,</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sphinx_proof"</span>,</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sphinx_design"</span>,</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sphinxcontrib.video"</span>,</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sphinx_togglebutton"</span>,</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sphinx_tabs.tabs"</span>,</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>    <span class="st">"nbsphinx"</span>,</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sphinxcontrib.youtube"</span>,</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>autodoc_typehints <span class="op">=</span> <span class="st">"description"</span></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>autodoc_class_signature <span class="op">=</span> <span class="st">"separated"</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>autosummary_generate <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>autodoc_default_options <span class="op">=</span> {</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>    <span class="st">"members"</span>: <span class="va">True</span>,</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>    <span class="st">"inherited-members"</span>: <span class="va">True</span>,</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>    <span class="st">"show-inheritance"</span>: <span class="va">False</span>,</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>autodoc_inherit_docstrings <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>myst_enable_extensions <span class="op">=</span> [<span class="st">"colon_fence"</span>]</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>nb_execution_mode <span class="op">=</span> <span class="st">"off"</span></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>nbsphinx_allow_errors <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>nbsphinx_execute <span class="op">=</span> <span class="st">"never"</span></span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a><span class="co"># Add any paths that contain templates here, relative to this directory.</span></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>templates_path <span class="op">=</span> [<span class="st">"_templates"</span>]</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a><span class="co"># List of patterns, relative to source directory, that match files and</span></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="co"># directories to ignore when looking for source files.</span></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a><span class="co"># This pattern also affects html_static_path and html_extra_path.</span></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>exclude_patterns <span class="op">=</span> [<span class="st">"_build"</span>, <span class="st">"Thumbs.db"</span>, <span class="st">".DS_Store"</span>]</span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>html_theme_options <span class="op">=</span> {</span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>    <span class="st">"repository_url"</span>: <span class="st">"https://github.com/PROJECT_ORG/PROJECT_NAME"</span>,</span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>    <span class="st">"use_repository_button"</span>: <span class="va">True</span>,</span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>    <span class="st">"use_download_button"</span>: <span class="va">True</span>,</span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>html_title <span class="op">=</span> <span class="st">"Docs Title"</span></span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Options for HTML output -------------------------------------------------</span></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a><span class="co"># The theme to use for HTML and HTML Help pages.  See the documentation for</span></span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a><span class="co"># a list of builtin themes.</span></span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a><span class="co"># html_theme = "furo"</span></span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>html_theme <span class="op">=</span> <span class="st">"sphinx_book_theme"</span></span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a><span class="co"># removes the .txt suffix</span></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>html_sourcelink_suffix <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a><span class="co"># Add any paths that contain custom static files (such as style sheets) here,</span></span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a><span class="co"># relative to this directory. They are copied after the builtin static files,</span></span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a><span class="co"># so a file named "default.css" will overwrite the builtin "default.css".</span></span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>html_static_path <span class="op">=</span> [<span class="st">"static"</span>]</span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>autodoc_mock_imports <span class="op">=</span> [] <span class="co">#libraries you don't want to install when building the docs </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 
 
 </section>
@@ -334,12 +471,12 @@ cookieconsent.run({
   author = {Vaibhav Balloli},
   title = {Development {Setup}},
   date = {2022-07-12},
-  url = {https://vballoli.github.io/research-recap//posts/dev-setup},
+  url = {https://github.com/vballoli/research-recap/posts/dev-setup},
   langid = {en}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-balloli2022" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
 Vaibhav Balloli. 2022. <span>“Development Setup.”</span> July 12, 2022.
-<a href="https://vballoli.github.io/research-recap//posts/dev-setup">https://vballoli.github.io/research-recap//posts/dev-setup</a>.
+<a href="https://github.com/vballoli/research-recap/posts/dev-setup">https://github.com/vballoli/research-recap/posts/dev-setup</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -473,8 +610,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
-<script src="https://giscus.app/client.js" data-repo="vballoli/research-recap" data-repo-id="R_kgDOH0vMDQ" data-category="General" data-category-id="DIC_kwDOH0vMDc4CUGbb" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
 <footer class="footer">
