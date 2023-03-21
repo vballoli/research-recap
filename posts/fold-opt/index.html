@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vaibhav Balloli">
-<meta name="dcterms.date" content="2022-08-15">
+<meta name="dcterms.date" content="2023-02-14">
 
-<title>Research Recap - Lessons from writing Research Code</title>
+<title>Research Recap - Folded Optimization for End-to-End Model-Based Learning: A summary</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,25 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
+}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
 }
 </style>
 
@@ -90,8 +109,8 @@ cookieconsent.run({
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta name="twitter:title" content="Research Recap - Lessons from writing Research Code">
-<meta name="twitter:description" content="Having written a good amount of research code for a while now, I was wondering what “good research code” can be construed as.">
+<meta name="twitter:title" content="Research Recap - Folded Optimization for End-to-End Model-Based Learning: A summary">
+<meta name="twitter:description" content="Folded Optimization for End-to-End Model-Based Learning by Kotary, Dinh, and Fioretto (2023) is an exciting new paper that tackles the problem of integrating constrained optimization models/solvers…">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -164,11 +183,9 @@ cookieconsent.run({
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Lessons from writing Research Code</h1>
+      <h1 class="title">Folded Optimization for End-to-End Model-Based Learning: A summary</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">code</div>
-                <div class="quarto-category">setup</div>
-                <div class="quarto-category">research</div>
+                <div class="quarto-category">Optimization</div>
               </div>
                   </div>
   </div>
@@ -186,7 +203,7 @@ cookieconsent.run({
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 15, 2022</p>
+        <p class="date">February 14, 2023</p>
       </div>
     </div>
     
@@ -202,7 +219,11 @@ cookieconsent.run({
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#but-why-invest-additional-time-in-this" id="toc-but-why-invest-additional-time-in-this" class="nav-link active" data-scroll-target="#but-why-invest-additional-time-in-this">But why invest additional time in this ?</a></li>
+  <li><a href="#preliminaries" id="toc-preliminaries" class="nav-link active" data-scroll-target="#preliminaries">Preliminaries</a>
+  <ul class="collapse">
+  <li><a href="#unfolding-and-unrolling" id="toc-unfolding-and-unrolling" class="nav-link" data-scroll-target="#unfolding-and-unrolling">Unfolding and Unrolling</a></li>
+  <li><a href="#analytic-differentiation" id="toc-analytic-differentiation" class="nav-link" data-scroll-target="#analytic-differentiation">Analytic Differentiation</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -212,48 +233,53 @@ cookieconsent.run({
 
 
 
-<p>Having written a good amount of research code for a while now, I was wondering what “good research code” can be construed as. This topic has been discussed heavily with a lot of good blog posts and materials on the internet (some I’ve found: <a href="https://www.hongyuanmei.com/blog/2021/researchcodebasics/">Hongyuan Mei’s blog</a>, <a href="https://goodresearch.dev/">Good Research Code Handbook</a>, etc.). Personally, I have a checklist of things that potrays my version of the basic requirements of good research code, in the context of ease of use for other researchers/practioners:</p>
-<ol type="1">
-<li>Clear directory, functional structure to all the different contributions of the research code.</li>
-<li>Simple docs to guide researchers who want to reproduce/modify certain parts of the pipeline (certainly helpful with docstrings hosted on <a href="https://readthedocs.org">ReadTheDocs</a>).</li>
-<li>Clear README to include instructions to run, cite, and contact-info authors</li>
-<li>LICENSE File(specially when working at industrial labs)</li>
-<li>Docker images for quick implementation</li>
-<li>Code/tutorials to fiddle with and generate the plots of the experiments.</li>
-</ol>
-<p>Special note: A good documentation in my observation(see point 2. above) has immensely helped me in navigating relatively new fields of research, particularly in Machine Learning.</p>
-<section id="but-why-invest-additional-time-in-this" class="level2">
-<h2 class="anchored" data-anchor-id="but-why-invest-additional-time-in-this">But why invest additional time in this ?</h2>
-<p>The recent trend suggests that most research code goes through multiple phases:</p>
-<ol type="1">
-<li>Quick, dirty implementation of the idea in mind</li>
-<li>Write scripts to get results</li>
-<li>Make code public</li>
-</ol>
-<p>Ideally, it should be something like this:</p>
-<ol type="1">
-<li>Quick, dirty implementation of the idea in mind.</li>
-<li>Tidy code, structured implementation of both the boiler plate, previous work and the core contribution.</li>
-<li>Write reproducible scripts and automate most metric collection, results charting and documentation to reduce manual work.</li>
-<li>Once code goes public, spending some time in maintaining/addressing user issues.</li>
-</ol>
-<p>You’ll notice it’s the second point that differentiates between good and terrible practices - tidying up code at the right time. Given the results of the quick prototype that backed your idea, it’s clear that you’ll be investing a good portion of your time diving deep into all the nuances of this prototype. This means there should be more research and <strong>less manual work</strong>. What manual work refers to here is often times bad code can result in a lot of manual work of coarsing through csvs, logs, metadata, and other things that shifts the focus from research to running scripts manually.</p>
-<p>This means the tools you use(IDE, software, hardware) etc. is something you should be familiar with, mostly from previous experience on other projects. This ensures that: 1. Not a lot of time is spent on setup (at the start of the project) and publishing (at the end of the project) 2. Working within a comfortable zone of tools ensures productivity and consistency.</p>
-<p>My <a href="../../posts/dev-setup/index.html">dev setup</a> is a culmination of mostly research and some non-research tools that is mostly oriented towards working on Windows based local machines with WSL and Linux machines with GPUs.</p>
+<p><em>Folded Optimization for End-to-End Model-Based Learning</em> by <span class="citation" data-cites="kotary2023folded">Kotary, Dinh, and Fioretto (<a href="#ref-kotary2023folded" role="doc-biblioref">2023</a>)</span> is an exciting new paper that tackles the problem of integrating constrained optimization models/solvers into the neural network pipeline. For example, a scenario where the outputs of a neural network act as inputs to these solvers that output the optimal decisions. This problem has been tackled before in various forms depending on the target task and the assumptions made to relax some of the differentiability constraints(see <span class="citation" data-cites="donti2021dc3">Donti, Rolnick, and Kolter (<a href="#ref-donti2021dc3" role="doc-biblioref">2021</a>)</span>, <span class="citation" data-cites="ferber2020mipaal">Ferber et al. (<a href="#ref-ferber2020mipaal" role="doc-biblioref">2020</a>)</span>, <span class="citation" data-cites="poganvcic2020differentiation">Pogančić et al. (<a href="#ref-poganvcic2020differentiation" role="doc-biblioref">2020</a>)</span> and many more). More recently, this line of work are being turned into libraries(<span class="citation" data-cites="amos2017optnet">Amos and Kolter (<a href="#ref-amos2017optnet" role="doc-biblioref">2017</a>)</span>, <span class="citation" data-cites="pineda2022theseus">Pineda et al. (<a href="#ref-pineda2022theseus" role="doc-biblioref">2022</a>)</span>) built on top of frameworks capable of autograd like <a href="pytorch.org">PyTorch</a> for users to model their own scenarios without having to implement them from scratch. This is an important problem, especially when there a lot of tasks in various industries and applications that require decision making under non-convex constraints and uncertain data.</p>
+<p>In this post, I summarize the paper by covering some preliminary concepts, present the intuition behind the contribution and go over some key takeaways from this. This paper also provides a library <code>fold-opt</code> that is yet to be open sourced, so I’ll also be covering that once that happens.</p>
+<section id="preliminaries" class="level1">
+<h1>Preliminaries</h1>
+<p>What makes this problem difficult is the <em>lack of meaningful gradients</em> i.e.&nbsp;technically gradients can exist everywhere, they’re often vanishing(zero) at discontinuous points that occur often in these problems, which prohibits any sort of learning via neural networks. Hence, the paper argues that the <strong>Analytic differentiation</strong> strategy, when paired with <strong>Unfolding</strong> can lead to an end-to-end pipeline that supports any solver.</p>
+<section id="unfolding-and-unrolling" class="level2">
+<h2 class="anchored" data-anchor-id="unfolding-and-unrolling">Unfolding and Unrolling</h2>
+<p>Let’s uncover unfolding and unrolling. Unrolling is a simple process of backpropogating the optimization through the computation graph without explicity calculating their jacobians.</p>
+</section>
+<section id="analytic-differentiation" class="level2">
+
+
 
 
 </section>
+</section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{balloli2022,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Analytic Differentiation</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-amos2017optnet" class="csl-entry" role="doc-biblioentry">
+Amos, Brandon, and J Zico Kolter. 2017. <span>“Optnet: Differentiable Optimization as a Layer in Neural Networks.”</span> In <em>International Conference on Machine Learning</em>, 136–45. PMLR.
+</div>
+<div id="ref-donti2021dc3" class="csl-entry" role="doc-biblioentry">
+Donti, Priya L, David Rolnick, and J Zico Kolter. 2021. <span>“DC3: A Learning Method for Optimization with Hard Constraints.”</span> <em>arXiv Preprint arXiv:2104.12225</em>.
+</div>
+<div id="ref-ferber2020mipaal" class="csl-entry" role="doc-biblioentry">
+Ferber, Aaron, Bryan Wilder, Bistra Dilkina, and Milind Tambe. 2020. <span>“Mipaal: Mixed Integer Program as a Layer.”</span> In <em>Proceedings of the AAAI Conference on Artificial Intelligence</em>, 34:1504–11. 02.
+</div>
+<div id="ref-kotary2023folded" class="csl-entry" role="doc-biblioentry">
+Kotary, James, My H Dinh, and Ferdinando Fioretto. 2023. <span>“Folded Optimization for End-to-End Model-Based Learning.”</span> <em>arXiv Preprint arXiv:2301.12047</em>.
+</div>
+<div id="ref-pineda2022theseus" class="csl-entry" role="doc-biblioentry">
+Pineda, Luis, Taosha Fan, Maurizio Monge, Shobha Venkataraman, Paloma Sodhi, Ricky Chen, Joseph Ortiz, et al. 2022. <span>“Theseus: A Library for Differentiable Nonlinear Optimization.”</span> <em>arXiv Preprint arXiv:2207.09442</em>.
+</div>
+<div id="ref-poganvcic2020differentiation" class="csl-entry" role="doc-biblioentry">
+Pogančić, Marin Vlastelica, Anselm Paulus, Vit Musil, Georg Martius, and Michal Rolinek. 2020. <span>“Differentiation of Blackbox Combinatorial Solvers.”</span> In <em>International Conference on Learning Representations</em>.
+</div>
+</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{balloli2023,
   author = {Vaibhav Balloli},
-  title = {Lessons from Writing {Research} {Code}},
-  date = {2022-08-15},
-  url = {research-blog.vballoli.com/posts/research-code},
+  title = {Folded {Optimization} for {End-to-End} {Model-Based}
+    {Learning:} {A} Summary},
+  date = {2023-02-14},
+  url = {research-blog.vballoli.com/posts/fold-opt},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-balloli2022" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
-Vaibhav Balloli. 2022. <span>“Lessons from Writing Research
-Code.”</span> August 15, 2022. <a href="https://research-blog.vballoli.com/posts/research-code">research-blog.vballoli.com/posts/research-code</a>.
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-balloli2023" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
+Vaibhav Balloli. 2023. <span>“Folded Optimization for End-to-End
+Model-Based Learning: A Summary.”</span> February 14, 2023. <a href="https://research-blog.vballoli.com/posts/fold-opt">research-blog.vballoli.com/posts/fold-opt</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
