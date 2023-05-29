@@ -2,7 +2,6 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/fold-opt/index.html",
       "/posts/offline-rl/index.html",
       "/posts/research-code/index.html",
       "/posts/dev-setup/index.html"

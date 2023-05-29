@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.313">
+<meta name="generator" content="quarto-1.2.280">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -203,6 +203,7 @@ cookieconsent.run({
    
   <ul>
   <li><a href="#but-why-invest-additional-time-in-this" id="toc-but-why-invest-additional-time-in-this" class="nav-link active" data-scroll-target="#but-why-invest-additional-time-in-this">But why invest additional time in this ?</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
   </ul>
 </nav>
     </div>
@@ -212,19 +213,19 @@ cookieconsent.run({
 
 
 
-<p>Having written a good amount of research code for a while now, I was wondering what “good research code” can be construed as. This topic has been discussed heavily with a lot of good blog posts and materials on the internet (some I’ve found: <a href="https://www.hongyuanmei.com/blog/2021/researchcodebasics/">Hongyuan Mei’s blog</a>, <a href="https://goodresearch.dev/">Good Research Code Handbook</a>, etc.). Personally, I have a checklist of things that potrays my version of the basic requirements of good research code, in the context of ease of use for other researchers/practioners:</p>
+<p>Having written a good amount of research code for a while now, I was wondering what “good research code” can be construed as. This topic has been discussed heavily with a lot of good blog posts and materials on the internet (some I’ve found: <a href="https://goodresearch.dev/">Good Research Code Handbook</a>, <a href="https://rlblogging.notion.site/Personal-Rules-of-Productive-Research-44a456bacf7c4805a9ea417b9d3ab1b3">Eugene Vinitsky’s blog post</a> etc.). Personally, I have a checklist of things that potrays my version of the basic requirements of good research code, in the context of ease of use for other researchers/practioners:</p>
 <ol type="1">
-<li>Clear directory, functional structure to all the different contributions of the research code.</li>
+<li>Clear directory and functional structure to all the different contributions of the research code.</li>
 <li>Simple docs to guide researchers who want to reproduce/modify certain parts of the pipeline (certainly helpful with docstrings hosted on <a href="https://readthedocs.org">ReadTheDocs</a>).</li>
-<li>Clear README to include instructions to run, cite, and contact-info authors</li>
-<li>LICENSE File(specially when working at industrial labs)</li>
-<li>Docker images for quick implementation</li>
+<li>Clear README to include instructions to run, cite, and contact-info authors.</li>
+<li>LICENSE File(specially when working at industrial labs) - at the end of the project.</li>
+<li>Docker images for quick env setup.</li>
 <li>Code/tutorials to fiddle with and generate the plots of the experiments.</li>
 </ol>
-<p>Special note: A good documentation in my observation(see point 2. above) has immensely helped me in navigating relatively new fields of research, particularly in Machine Learning.</p>
+<p>Special note: A good documentation in my observation(see point 2. above) has immensely helped me in navigating relatively new fields of research, particularly in Machine Learning, specially when the part of the contribution of the research was the software package.</p>
 <section id="but-why-invest-additional-time-in-this" class="level2">
 <h2 class="anchored" data-anchor-id="but-why-invest-additional-time-in-this">But why invest additional time in this ?</h2>
-<p>The recent trend suggests that most research code goes through multiple phases:</p>
+<p>Based on my observations regarding public research code, a trend emerges on how most research code goes from ideation to release:</p>
 <ol type="1">
 <li>Quick, dirty implementation of the idea in mind</li>
 <li>Write scripts to get results</li>
@@ -238,8 +239,46 @@ cookieconsent.run({
 <li>Once code goes public, spending some time in maintaining/addressing user issues.</li>
 </ol>
 <p>You’ll notice it’s the second point that differentiates between good and terrible practices - tidying up code at the right time. Given the results of the quick prototype that backed your idea, it’s clear that you’ll be investing a good portion of your time diving deep into all the nuances of this prototype. This means there should be more research and <strong>less manual work</strong>. What manual work refers to here is often times bad code can result in a lot of manual work of coarsing through csvs, logs, metadata, and other things that shifts the focus from research to running scripts manually.</p>
-<p>This means the tools you use(IDE, software, hardware) etc. is something you should be familiar with, mostly from previous experience on other projects. This ensures that: 1. Not a lot of time is spent on setup (at the start of the project) and publishing (at the end of the project) 2. Working within a comfortable zone of tools ensures productivity and consistency.</p>
+<p>This means the tools you use(IDE, software, hardware) etc. is something you should be familiar with, mostly from previous experience on other projects. This ensures that: 1. Not a lot of time is spent on setup (at the start of the project) and publishing (at the end of the project) 2. Working within a comfortable set of tools ensures productivity and consistency.</p>
+</section>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <p>My <a href="../../posts/dev-setup/index.html">dev setup</a> is a culmination of mostly research and some non-research tools that is mostly oriented towards working on Windows based local machines with WSL and Linux machines with GPUs.</p>
+<p>Based on my experience, I currently recommend myself and others to follow this folder structure strategy:</p>
+<pre><code>.
+└── research-code/
+    ├── setup.py
+    ├── .env
+    ├── .gitignore
+    ├── run.sh (script to run all the experiments)
+    ├── README.md (project metadata, instructions, links)
+    ├── Dockerfile
+    ├── requirements.txt
+    ├── project-name/
+    │   ├── init.py
+    │   ├── module1
+    │   ├── module2
+    │   └── utils.py
+    ├── outputs/
+    │   └── experiment-name/
+    │       ├── csv1
+    │       ├── csv2
+    │       ├── config.json/config.yaml (experiment configuration/metadata - git commit, seed, etc.)
+    │       ├── debug.log 
+    │       └── details.json (wall clock time, gpu utilization, etc.)
+    └── plots/
+        └── experiment-name/
+            ├── plot1/
+            │   ├── plot1.pdf
+            │   └── plot1.png
+            └── plot2/
+                ├── plot2.pdfhttps://github.com/tmux/tmux/wiki
+                └── plot2.png</code></pre>
+<ol type="1">
+<li>Plots - save two version for each plot - pdf and png depending on if the plot is being used in a paper or a presentation</li>
+<li>Outputs - save the details of the experiment: output csvs, configuration, debug log, etc. for easy reference. <em>If possible, add a cron job that backups up these folders to a safe location</em></li>
+</ol>
+<p>Personally, I use <a href="https://github.com/tmux/tmux/wiki">tmux</a> to run things in the background - it’s a simple and extremely helpful software that helps you multiplex terminals, run things via ssh and not worry about losing connection, etc. I’ve recently adopted some of the recommendations from <a href="https://rlblogging.notion.site/Personal-Rules-of-Productive-Research-44a456bacf7c4805a9ea417b9d3ab1b3">Eugene Vinitsky’s blog post</a> etc., specifically maintaining a research journal - adopting this has improved my productivity by quite a bit. The only observation I wanted to add is when running large, costly experiments you’d want to ensure the code never fails - this means testing each large function as much as possible. In my experience, I’m very impatient when running these experiments and I end up messing a small thing up, so I’d recommend running them with a clear mind and taking a small break after a long coding session.</p>
 
 
 </section>
@@ -248,12 +287,12 @@ cookieconsent.run({
   author = {Vaibhav Balloli},
   title = {Lessons from Writing {Research} {Code}},
   date = {2022-08-15},
-  url = {vballoli.github.io/posts/research-code},
+  url = {https://github.com/vballoli/research-recap/posts/research-code},
   langid = {en}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-balloli2022" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
 Vaibhav Balloli. 2022. <span>“Lessons from Writing Research
-Code.”</span> August 15, 2022. <a href="https://vballoli.github.io/posts/research-code">vballoli.github.io/posts/research-code</a>.
+Code.”</span> August 15, 2022. <a href="https://github.com/vballoli/research-recap/posts/research-code">https://github.com/vballoli/research-recap/posts/research-code</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -387,8 +426,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
-<script src="https://giscus.app/client.js" data-repo="vballoli/research-recap" data-repo-id="R_kgDOH0vMDQ" data-category="General" data-category-id="" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
 <footer class="footer">
