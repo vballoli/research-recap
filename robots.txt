@@ -1,1 +1,1 @@
-Sitemap: https://github.com/vballoli/research-recap/sitemap.xml
+Sitemap: https://vballoli.github.io/research-recap/sitemap.xml
