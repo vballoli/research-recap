@@ -72,9 +72,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author","listing-description","listing-categories"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -195,7 +195,7 @@ cookieconsent.run({
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div><div class="category" data-category="RL">RL <span class="quarto-category-count">(1)</span></div><div class="category" data-category="code">code <span class="quarto-category-count">(2)</span></div><div class="category" data-category="research">research <span class="quarto-category-count">(1)</span></div><div class="category" data-category="setup">setup <span class="quarto-category-count">(2)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(4)</span></div><div class="category" data-category="RL">RL <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bias">bias <span class="quarto-category-count">(1)</span></div><div class="category" data-category="code">code <span class="quarto-category-count">(2)</span></div><div class="category" data-category="research">research <span class="quarto-category-count">(1)</span></div><div class="category" data-category="risk">risk <span class="quarto-category-count">(1)</span></div><div class="category" data-category="setup">setup <span class="quarto-category-count">(2)</span></div><div class="category" data-category="uncertainty">uncertainty <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -232,7 +232,55 @@ cookieconsent.run({
     </div>
 </div>
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="RL" data-listing-date-sort="1674844200000" data-listing-file-modified-sort="1679076212025" data-listing-reading-time-sort="1.76">
+<div class="quarto-post image-right" data-index="0" data-categories="uncertainty,bias,risk" data-listing-date-sort="1686421800000" data-listing-file-modified-sort="1686431564501" data-listing-reading-time-sort="2.88">
+<div class="thumbnail">
+<p><a href="./posts/uncertainty-deep-learning/index.html"> <img src="./posts/uncertainty-deep-learning/uncertainty_meme.JPG" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/uncertainty-deep-learning/index.html">
+<h3 class="no-anchor listing-title">
+Uncertainty in Deep Learning
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('uncertainty'); return false;">
+uncertainty
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('bias'); return false;">
+bias
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('risk'); return false;">
+risk
+</div>
+</div>
+<a href="./posts/uncertainty-deep-learning/index.html">
+<div class="listing-description">
+Wi…<em></em><em></em>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/uncertainty-deep-learning/index.html">
+<div class="listing-date">
+Jun 11, 2023
+</div>
+<div class="listing-author">
+Vaibhav Balloli
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="RL" data-listing-date-sort="1674844200000" data-listing-file-modified-sort="1679076212025" data-listing-reading-time-sort="1.76">
+<div class="thumbnail">
+<a href="./posts/offline-rl/index.html">
+<div class="thumbnail-image">
+
+</div>
+</a><p><a href="./posts/offline-rl/index.html"></a></p>
+</div>
 <div class="body">
 <a href="./posts/offline-rl/index.html">
 <h3 class="no-anchor listing-title">
@@ -264,7 +312,14 @@ Vaibhav Balloli
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="code,setup,research" data-listing-date-sort="1660501800000" data-listing-file-modified-sort="1685382768039" data-listing-reading-time-sort="4.83">
+<div class="quarto-post image-right" data-index="2" data-categories="code,setup,research" data-listing-date-sort="1660501800000" data-listing-file-modified-sort="1685382768039" data-listing-reading-time-sort="4.83">
+<div class="thumbnail">
+<a href="./posts/research-code/index.html">
+<div class="thumbnail-image">
+
+</div>
+</a><p><a href="./posts/research-code/index.html"></a></p>
+</div>
 <div class="body">
 <a href="./posts/research-code/index.html">
 <h3 class="no-anchor listing-title">
@@ -302,7 +357,14 @@ Vaibhav Balloli
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="code,setup" data-listing-date-sort="1657564200000" data-listing-file-modified-sort="1679083707395" data-listing-reading-time-sort="3.715">
+<div class="quarto-post image-right" data-index="3" data-categories="code,setup" data-listing-date-sort="1657564200000" data-listing-file-modified-sort="1679083707395" data-listing-reading-time-sort="3.715">
+<div class="thumbnail">
+<a href="./posts/dev-setup/index.html">
+<div class="thumbnail-image">
+
+</div>
+</a><p><a href="./posts/dev-setup/index.html"></a></p>
+</div>
 <div class="body">
 <a href="./posts/dev-setup/index.html">
 <h3 class="no-anchor listing-title">

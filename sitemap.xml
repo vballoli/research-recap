@@ -2,22 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://github.com/vballoli/research-recap/about.html</loc>
-    <lastmod>2023-05-29T17:53:32.636Z</lastmod>
+    <lastmod>2023-06-10T21:13:32.216Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/vballoli/research-recap/index.html</loc>
-    <lastmod>2023-05-29T17:53:33.432Z</lastmod>
+    <lastmod>2023-06-10T21:13:32.892Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/vballoli/research-recap/posts/dev-setup/index.html</loc>
-    <lastmod>2023-05-29T17:53:34.439Z</lastmod>
+    <lastmod>2023-06-10T21:13:33.862Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/vballoli/research-recap/posts/offline-rl/index.html</loc>
-    <lastmod>2023-05-29T17:53:35.181Z</lastmod>
+    <lastmod>2023-06-10T21:13:34.575Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/vballoli/research-recap/posts/research-code/index.html</loc>
-    <lastmod>2023-05-29T17:53:35.860Z</lastmod>
+    <lastmod>2023-06-10T21:13:35.255Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/vballoli/research-recap/posts/uncertainty-deep-learning/index.html</loc>
+    <lastmod>2023-06-10T21:13:35.999Z</lastmod>
   </url>
 </urlset>

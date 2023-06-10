@@ -11,7 +11,7 @@
     "href": "index.html",
     "title": "Research Recap",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\nOffline Reinforcement Learning\n\n\n\n\n\n\n\nRL\n\n\n\n\n\n\n\n\n\n\n\nJan 28, 2023\n\n\nVaibhav Balloli\n\n\n\n\n\n\n\n\nLessons from writing Research Code\n\n\n\n\n\n\n\ncode\n\n\nsetup\n\n\nresearch\n\n\n\n\n\n\n\n\n\n\n\nAug 15, 2022\n\n\nVaibhav Balloli\n\n\n\n\n\n\n\n\nDevelopment Setup\n\n\n\n\n\n\n\ncode\n\n\nsetup\n\n\n\n\n\n\n\n\n\n\n\nJul 12, 2022\n\n\nVaibhav Balloli\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n  \n\n\n\n\nUncertainty in Deep Learning\n\n\n\n\n\n\n\nuncertainty\n\n\nbias\n\n\nrisk\n\n\n\n\n\n\n\n\n\n\n\nJun 11, 2023\n\n\nVaibhav Balloli\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOffline Reinforcement Learning\n\n\n\n\n\n\n\nRL\n\n\n\n\n\n\n\n\n\n\n\nJan 28, 2023\n\n\nVaibhav Balloli\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLessons from writing Research Code\n\n\n\n\n\n\n\ncode\n\n\nsetup\n\n\nresearch\n\n\n\n\n\n\n\n\n\n\n\nAug 15, 2022\n\n\nVaibhav Balloli\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDevelopment Setup\n\n\n\n\n\n\n\ncode\n\n\nsetup\n\n\n\n\n\n\n\n\n\n\n\nJul 12, 2022\n\n\nVaibhav Balloli\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/dev-setup/index.html",
@@ -68,5 +68,26 @@
     "title": "Lessons from writing Research Code",
     "section": "Setup",
     "text": "Setup\nMy dev setup is a culmination of mostly research and some non-research tools that is mostly oriented towards working on Windows based local machines with WSL and Linux machines with GPUs.\nBased on my experience, I currently recommend myself and others to follow this folder structure strategy:\n.\n└── research-code/\n    ├── setup.py\n    ├── .env\n    ├── .gitignore\n    ├── run.sh (script to run all the experiments)\n    ├── README.md (project metadata, instructions, links)\n    ├── Dockerfile\n    ├── requirements.txt\n    ├── project-name/\n    │   ├── init.py\n    │   ├── module1\n    │   ├── module2\n    │   └── utils.py\n    ├── outputs/\n    │   └── experiment-name/\n    │       ├── csv1\n    │       ├── csv2\n    │       ├── config.json/config.yaml (experiment configuration/metadata - git commit, seed, etc.)\n    │       ├── debug.log \n    │       └── details.json (wall clock time, gpu utilization, etc.)\n    └── plots/\n        └── experiment-name/\n            ├── plot1/\n            │   ├── plot1.pdf\n            │   └── plot1.png\n            └── plot2/\n                ├── plot2.pdfhttps://github.com/tmux/tmux/wiki\n                └── plot2.png\n\nPlots - save two version for each plot - pdf and png depending on if the plot is being used in a paper or a presentation\nOutputs - save the details of the experiment: output csvs, configuration, debug log, etc. for easy reference. If possible, add a cron job that backups up these folders to a safe location\n\nPersonally, I use tmux to run things in the background - it’s a simple and extremely helpful software that helps you multiplex terminals, run things via ssh and not worry about losing connection, etc. I’ve recently adopted some of the recommendations from Eugene Vinitsky’s blog post etc., specifically maintaining a research journal - adopting this has improved my productivity by quite a bit. The only observation I wanted to add is when running large, costly experiments you’d want to ensure the code never fails - this means testing each large function as much as possible. In my experience, I’m very impatient when running these experiments and I end up messing a small thing up, so I’d recommend running them with a clear mind and taking a small break after a long coding session."
+  },
+  {
+    "objectID": "posts/uncertainty-deep-learning/index.html",
+    "href": "posts/uncertainty-deep-learning/index.html",
+    "title": "Uncertainty in Deep Learning",
+    "section": "",
+    "text": "With the impressive performance of deep learning, adoption of such models are massive and dependence on them becomes imperative. This begs the question - how confident are these deep learning models in their predictions / recommendations ? It is clear that the output of these models, without any sense of confidence can quickly be disastrous, depending on the sensitivity and scale of the people impacted. This blog post aims to cover some of these topics - from understanding what it means to predict how confident a model is to other techniques like calibration that is used to tune models to a real-world likelihood."
+  },
+  {
+    "objectID": "posts/uncertainty-deep-learning/index.html#aleatoric-uncertainty",
+    "href": "posts/uncertainty-deep-learning/index.html#aleatoric-uncertainty",
+    "title": "Uncertainty in Deep Learning",
+    "section": "Aleatoric Uncertainty",
+    "text": "Aleatoric Uncertainty\nAleatoric Uncertainty simply stated is irreducible uncertainty due to the inherent stochasticity. This section covers calculating Aleatoric Uncertainty through Mean Variance Estimation (Nix and Weigend 1994). Given an input \\(X\\), we’re interested in estimating the (a) conditional mean i.e. \\(\\mu(y\\vert x)\\) and (b) uncertainty estimate by calculating the variance \\(\\sigma^2(x)\\). Note, both the mean and variance are dependent on the input. By adding an additional layer(with weights $W_{}) that estimates \\(\\sigma^2\\), \\(\\sigma^2(x) = W^T * h + \\beta\\), where \\(\\beta\\) is the bias. In order to make variance positive, an exponential activation is added in the end (Nix and Weigend 1994). Another modern spin on this is using the reparameterization trick (Kingma, Salimans, and Welling 2015) (see the implementation here on Ripple), where a random variable \\(\\epsilon\\) is introduced to enable backpropogating through a random node."
+  },
+  {
+    "objectID": "posts/uncertainty-deep-learning/index.html#epistemic-uncertainty",
+    "href": "posts/uncertainty-deep-learning/index.html#epistemic-uncertainty",
+    "title": "Uncertainty in Deep Learning",
+    "section": "Epistemic Uncertainty",
+    "text": "Epistemic Uncertainty\n\n\n\nEpistemic Uncertainty. Credit XKCD XKCD Wiki"
   }
 ]
