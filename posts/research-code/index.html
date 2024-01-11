@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-1.4.537">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -19,7 +19,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
 </style>
@@ -49,7 +49,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -58,18 +64,20 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-SHGZ8K6605"></script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-35WV1WKM7Q"></script>
 
 <script type="text/plain" cookie-consent="tracking">
 
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', 'G-SHGZ8K6605', { 'anonymize_ip': true});
+gtag('config', 'G-35WV1WKM7Q', { 'anonymize_ip': true});
 </script>
 
 <script type="text/javascript" charset="UTF-8">
@@ -83,6 +91,8 @@ cookieconsent.run({
   "notice_banner_reject_button_hide":false,
   "preferences_center_close_button_hide":false,
   "website_name":""
+  ,
+"language":"en"
   });
 });
 </script> 
@@ -91,72 +101,72 @@ cookieconsent.run({
 
 <link rel="stylesheet" href="../../styles.css">
 <meta name="twitter:title" content="Research Recap - Lessons from writing Research Code">
-<meta name="twitter:description" content="Having written a good amount of research code for a while now, I was wondering what “good research code” can be construed as.">
+<meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
 
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Research Recap</span>
     </a>
   </div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html">
- <span class="menu-text">About Me</span></a>
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About Me</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/vballoli"><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/vballoli"> <i class="bi bi-github" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/v_balloli"><i class="bi bi-twitter" role="img">
+    <a class="nav-link" href="https://twitter.com/v_balloli"> <i class="bi bi-twitter" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://vballoli.github.io"><i class="bi bi-globe" role="img">
+    <a class="nav-link" href="https://vballoli.github.io"> <i class="bi bi-globe" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://vballoli.com"><i class="bi bi-book" role="img">
+    <a class="nav-link" href="https://vballoli.com"> <i class="bi bi-book" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="mailto:balloli.vb@gmail.com"><i class="bi bi-envelope-open" role="img">
+    <a class="nav-link" href="mailto:balloli.vb@gmail.com"> <i class="bi bi-envelope-open" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="../../index.xml"><i class="bi bi-rss" role="img">
+    <a class="nav-link" href="../../index.xml"> <i class="bi bi-rss" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
-              <div class="quarto-toggle-container">
-                  <a href="" class="quarto-reader-toggle nav-link" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
   </div>
 </a>
-              </div>
-              <div id="quarto-search" class="" title="Search"></div>
-          </div> <!-- /navcollapse -->
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -203,7 +213,6 @@ cookieconsent.run({
    
   <ul>
   <li><a href="#but-why-invest-additional-time-in-this" id="toc-but-why-invest-additional-time-in-this" class="nav-link active" data-scroll-target="#but-why-invest-additional-time-in-this">But why invest additional time in this ?</a></li>
-  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
   </ul>
 </nav>
     </div>
@@ -213,19 +222,20 @@ cookieconsent.run({
 
 
 
-<p>Having written a good amount of research code for a while now, I was wondering what “good research code” can be construed as. This topic has been discussed heavily with a lot of good blog posts and materials on the internet (some I’ve found: <a href="https://goodresearch.dev/">Good Research Code Handbook</a>, <a href="https://rlblogging.notion.site/Personal-Rules-of-Productive-Research-44a456bacf7c4805a9ea417b9d3ab1b3">Eugene Vinitsky’s blog post</a> etc.). Personally, I have a checklist of things that potrays my version of the basic requirements of good research code, in the context of ease of use for other researchers/practioners:</p>
+
+<p>Having written a good amount of research code for a while now, I was wondering what “good research code” can be construed as. This topic has been discussed heavily with a lot of good blog posts and materials on the internet (some I’ve found: <a href="https://www.hongyuanmei.com/blog/2021/researchcodebasics/">Hongyuan Mei’s blog</a>, <a href="https://goodresearch.dev/">Good Research Code Handbook</a>, etc.). Personally, I have a checklist of things that potrays my version of the basic requirements of good research code, in the context of ease of use for other researchers/practioners:</p>
 <ol type="1">
-<li>Clear directory and functional structure to all the different contributions of the research code.</li>
+<li>Clear directory, functional structure to all the different contributions of the research code.</li>
 <li>Simple docs to guide researchers who want to reproduce/modify certain parts of the pipeline (certainly helpful with docstrings hosted on <a href="https://readthedocs.org">ReadTheDocs</a>).</li>
-<li>Clear README to include instructions to run, cite, and contact-info authors.</li>
-<li>LICENSE File(specially when working at industrial labs) - at the end of the project.</li>
-<li>Docker images for quick env setup.</li>
+<li>Clear README to include instructions to run, cite, and contact-info authors</li>
+<li>LICENSE File(specially when working at industrial labs)</li>
+<li>Docker images for quick implementation</li>
 <li>Code/tutorials to fiddle with and generate the plots of the experiments.</li>
 </ol>
-<p>Special note: A good documentation in my observation(see point 2. above) has immensely helped me in navigating relatively new fields of research, particularly in Machine Learning, specially when the part of the contribution of the research was the software package.</p>
+<p>Special note: A good documentation in my observation(see point 2. above) has immensely helped me in navigating relatively new fields of research, particularly in Machine Learning.</p>
 <section id="but-why-invest-additional-time-in-this" class="level2">
 <h2 class="anchored" data-anchor-id="but-why-invest-additional-time-in-this">But why invest additional time in this ?</h2>
-<p>Based on my observations regarding public research code, a trend emerges on how most research code goes from ideation to release:</p>
+<p>The recent trend suggests that most research code goes through multiple phases:</p>
 <ol type="1">
 <li>Quick, dirty implementation of the idea in mind</li>
 <li>Write scripts to get results</li>
@@ -239,60 +249,22 @@ cookieconsent.run({
 <li>Once code goes public, spending some time in maintaining/addressing user issues.</li>
 </ol>
 <p>You’ll notice it’s the second point that differentiates between good and terrible practices - tidying up code at the right time. Given the results of the quick prototype that backed your idea, it’s clear that you’ll be investing a good portion of your time diving deep into all the nuances of this prototype. This means there should be more research and <strong>less manual work</strong>. What manual work refers to here is often times bad code can result in a lot of manual work of coarsing through csvs, logs, metadata, and other things that shifts the focus from research to running scripts manually.</p>
-<p>This means the tools you use(IDE, software, hardware) etc. is something you should be familiar with, mostly from previous experience on other projects. This ensures that: 1. Not a lot of time is spent on setup (at the start of the project) and publishing (at the end of the project) 2. Working within a comfortable set of tools ensures productivity and consistency.</p>
-</section>
-<section id="setup" class="level2">
-<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>This means the tools you use(IDE, software, hardware) etc. is something you should be familiar with, mostly from previous experience on other projects. This ensures that: 1. Not a lot of time is spent on setup (at the start of the project) and publishing (at the end of the project) 2. Working within a comfortable zone of tools ensures productivity and consistency.</p>
 <p>My <a href="../../posts/dev-setup/index.html">dev setup</a> is a culmination of mostly research and some non-research tools that is mostly oriented towards working on Windows based local machines with WSL and Linux machines with GPUs.</p>
-<p>Based on my experience, I currently recommend myself and others to follow this folder structure strategy:</p>
-<pre><code>.
-└── research-code/
-    ├── setup.py
-    ├── .env
-    ├── .gitignore
-    ├── run.sh (script to run all the experiments)
-    ├── README.md (project metadata, instructions, links)
-    ├── Dockerfile
-    ├── requirements.txt
-    ├── project-name/
-    │   ├── init.py
-    │   ├── module1
-    │   ├── module2
-    │   └── utils.py
-    ├── outputs/
-    │   └── experiment-name/
-    │       ├── csv1
-    │       ├── csv2
-    │       ├── config.json/config.yaml (experiment configuration/metadata - git commit, seed, etc.)
-    │       ├── debug.log 
-    │       └── details.json (wall clock time, gpu utilization, etc.)
-    └── plots/
-        └── experiment-name/
-            ├── plot1/
-            │   ├── plot1.pdf
-            │   └── plot1.png
-            └── plot2/
-                ├── plot2.pdfhttps://github.com/tmux/tmux/wiki
-                └── plot2.png</code></pre>
-<ol type="1">
-<li>Plots - save two version for each plot - pdf and png depending on if the plot is being used in a paper or a presentation</li>
-<li>Outputs - save the details of the experiment: output csvs, configuration, debug log, etc. for easy reference. <em>If possible, add a cron job that backups up these folders to a safe location</em></li>
-</ol>
-<p>Personally, I use <a href="https://github.com/tmux/tmux/wiki">tmux</a> to run things in the background - it’s a simple and extremely helpful software that helps you multiplex terminals, run things via ssh and not worry about losing connection, etc. I’ve recently adopted some of the recommendations from <a href="https://rlblogging.notion.site/Personal-Rules-of-Productive-Research-44a456bacf7c4805a9ea417b9d3ab1b3">Eugene Vinitsky’s blog post</a> etc., specifically maintaining a research journal - adopting this has improved my productivity by quite a bit. The only observation I wanted to add is when running large, costly experiments you’d want to ensure the code never fails - this means testing each large function as much as possible. In my experience, I’m very impatient when running these experiments and I end up messing a small thing up, so I’d recommend running them with a clear mind and taking a small break after a long coding session.</p>
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{balloli2022,
-  author = {Vaibhav Balloli},
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{balloli2022,
+  author = {Balloli, Vaibhav},
   title = {Lessons from Writing {Research} {Code}},
   date = {2022-08-15},
-  url = {https://vballoli.github.io/research-recap/posts/research-code},
+  url = {https://vballoli.github.io/research-recap//posts/research-code},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-balloli2022" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
-Vaibhav Balloli. 2022. <span>“Lessons from Writing Research
-Code.”</span> August 15, 2022. <a href="https://vballoli.github.io/research-recap/posts/research-code">https://vballoli.github.io/research-recap/posts/research-code</a>.
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-balloli2022" class="csl-entry quarto-appendix-citeas" role="listitem">
+Balloli, Vaibhav. 2022. <span>“Lessons from Writing Research
+Code.”</span> August 15, 2022. <a href="https://vballoli.github.io/research-recap//posts/research-code">https://vballoli.github.io/research-recap//posts/research-code</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -321,9 +293,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -359,10 +345,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -372,8 +357,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -388,6 +382,233 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -430,9 +651,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-      <div class="nav-footer-center">Copyright 2023, Vaibhav Balloli<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright 2023, Vaibhav Balloli</p>
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
   </div>
 </footer>
+
 
 
 

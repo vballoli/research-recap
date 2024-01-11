@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Vaibhav Balloli">
-<meta name="dcterms.date" content="2023-01-28">
+<meta name="dcterms.date" content="2024-01-06">
 
-<title>Research Recap - Offline Reinforcement Learning</title>
+<title>Research Recap - Concept Bottleneck Models</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,27 +22,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -120,7 +100,7 @@ cookieconsent.run({
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta name="twitter:title" content="Research Recap - Offline Reinforcement Learning">
+<meta name="twitter:title" content="Research Recap - Concept Bottleneck Models">
 <meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
@@ -194,9 +174,9 @@ cookieconsent.run({
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Offline Reinforcement Learning</h1>
+      <h1 class="title">Concept Bottleneck Models</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">RL</div>
+                <div class="quarto-category">human-AI collaboration</div>
               </div>
                   </div>
   </div>
@@ -214,7 +194,7 @@ cookieconsent.run({
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 28, 2023</p>
+        <p class="date">January 6, 2024</p>
       </div>
     </div>
     
@@ -230,64 +210,78 @@ cookieconsent.run({
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#offline-reinforcement-learning" id="toc-offline-reinforcement-learning" class="nav-link active" data-scroll-target="#offline-reinforcement-learning">Offline Reinforcement Learning</a>
+  <li><a href="#a-brief-introduction-to-concept-models" id="toc-a-brief-introduction-to-concept-models" class="nav-link active" data-scroll-target="#a-brief-introduction-to-concept-models">A brief introduction to Concept Models</a></li>
+  <li><a href="#concept-bottleneck-modelscbms" id="toc-concept-bottleneck-modelscbms" class="nav-link" data-scroll-target="#concept-bottleneck-modelscbms">Concept Bottleneck Models(CBMs)</a>
   <ul class="collapse">
-  <li><a href="#conservative-q-learning-kumar2020conservative" id="toc-conservative-q-learning-kumar2020conservative" class="nav-link" data-scroll-target="#conservative-q-learning-kumar2020conservative">Conservative Q-Learning <span class="citation" data-cites="kumar2020conservative">Kumar et al. (2020)</span></a></li>
-  <li><a href="#td3-behavior-cloning-fujimoto2021minimalist" id="toc-td3-behavior-cloning-fujimoto2021minimalist" class="nav-link" data-scroll-target="#td3-behavior-cloning-fujimoto2021minimalist">TD3 + Behavior Cloning <span class="citation" data-cites="fujimoto2021minimalist">Fujimoto and Gu (2021)</span></a></li>
+  <li><a href="#preparing-your-data-what-goes-into-training-a-traditional-cbm" id="toc-preparing-your-data-what-goes-into-training-a-traditional-cbm" class="nav-link" data-scroll-target="#preparing-your-data-what-goes-into-training-a-traditional-cbm">Preparing your data: what goes into training a traditional CBM</a></li>
+  <li><a href="#concepts-you-need-to-build-your-own-cbm" id="toc-concepts-you-need-to-build-your-own-cbm" class="nav-link" data-scroll-target="#concepts-you-need-to-build-your-own-cbm">Concepts you need to build your own CBM</a></li>
   </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
 
 
 
 
 
-<section id="offline-reinforcement-learning" class="level1">
-<h1>Offline Reinforcement Learning</h1>
-<p>Reinforcement Learning(RL), as simply stated in Sutton and Barto <span class="citation" data-cites="sutton2018reinforcement">Sutton and Barto (<a href="#ref-sutton2018reinforcement" role="doc-biblioref">2018</a>)</span> , is learning what to do i.e map situations to actions to maximize the cumulative reward for a series of steps. Naturally, trial and error is at the core of Reinforcement Learning i.e.&nbsp;RL learns in a hands-on approach exploring and exploiting its task, which is referred to as <em>online learning</em>, where <em>online</em> refers to agent manipulating the surroundings around it(commonly referred to as an Environment) with the available controls it has(referred to as actions). While such approaches have been popular and successful in many tasks, they often rely on continually improving the ability to search better and learn on the go, which does not translate well to tasks where the ability to explore the environment comes with a cost, which harms the ability of most state-of-the-art algorithms to learn. Hence, Offline Reinforcement Learning is a paradigm within RL that is tasked to learn optimal behaviour from a <strong>static</strong> dataset i.e.&nbsp;the available data is fixed and cannot be controlled, as it is often generated from an external agent. The figure below illustrates the key difference between traditional RL and offline RL.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://offline-rl.github.io/assets/OFFLINE_RL.gif" class="img-fluid figure-img"></p>
-<figcaption><sub><sup>Illustration of Traditional RL interactions vs Offline RL(credit: <a href="https://offline-rl-neurips.github.io">Offline RL NeurIPS</a> </sup></sub>)</figcaption>
+<section id="a-brief-introduction-to-concept-models" class="level1">
+<h1>A brief introduction to Concept Models</h1>
+<p>Imagine deploying a neural network. That’s it, that’s the joke.</p>
+<p>Now really imagine deploying a neural network or any other machine learning model that outputs some prediction on the given input. For example, let’s say it is a dog classifier i.e.&nbsp;given an image of a dog, it would output what breed of dog it could be. Now what if the model here first classified if the dog has certain visual features like <code>is_furry</code> is set to <code>true</code>, <code>is_golden</code> is set to <code>true</code>, <code>has_white_hair</code> is set to <code>false</code>. Only after predicting these features does the model then classify the dog to be a golden retriever. <strong>So, why is this important?</strong> After all, does it matter if these predictions are latent or shown? The key feature in this exercise is this - let’s say the the image was grainy and the network predicted <code>is_furry</code> feature to be <code>false</code> - you could now correct it and set it to <code>true</code> because it’s pretty easy for us humans to do so even without knowing what a golden retriever is. The model will now most likely classify the image as <code>golden_retriever</code>, thanks to your correction!</p>
+<p>This is the promise of Concept Models - the ability for humans to intervene in the prediction process by being allowed to modify the presence or absence of <em>concepts</em> in the input - images, text, etc. This idea was first formalized in Concept Bottleneck Models and numerous works have followed since that build up on this idea and really try to make it compatible to humans!</p>
+</section>
+<section id="concept-bottleneck-modelscbms" class="level1 page-columns page-full">
+<h1>Concept Bottleneck Models(CBMs)</h1>
+<p>CBMs are class of models that comprise of two stages of prediction - the first stage predicts the concepts i.e.&nbsp;the concept head and the second stage predicts the class by utilizing the concepts predicted. The key observation here is the list of concepts used to predict the final class <em>is not necessarily exhaustive</em>. A naive outlook at this indicates more concepts increase the degrees of freedom of control. The reason these models are called <em>bottleneck models</em> is due to the concept prediction stage that acts as a bottleneck before the actual class prediction. The figure below provides an illustration of CBMs.</p>
+<div class="page-columns page-full">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p class="page-columns page-full"><img src="CBM.001.png" class="img-fluid figure-img column-page" data-margin="0"></p>
+<figcaption>Concept Bottleneck Models with the Concept Head and the Classifier</figcaption>
 </figure>
 </div>
-<p>In this post, I cover some popular algorithms and code excerpts that help understand some of the implementation details regarding these algorithms to provide the intuition of how they work. For more documentation on how to run these algorithms, you can check out my repository that implements these algorithms in detail at <a href="https://github.com/vballoli/offlax">Offlax</a>:</p>
-<section id="conservative-q-learning-kumar2020conservative" class="level2">
-<h2 class="anchored" data-anchor-id="conservative-q-learning-kumar2020conservative">Conservative Q-Learning <span class="citation" data-cites="kumar2020conservative">Kumar et al. (<a href="#ref-kumar2020conservative" role="doc-biblioref">2020</a>)</span></h2>
-<p>Conservative Q-Learning(CQL) builds on top of existing algorithms like QR-DQN(for discrete action spaces) and SAC(for continuous action spaces). As the paper suggests, CQL only requires 20 lines of additional code over the existing RL algorithms like QR-DQN and SAC.</p>
-</section>
-<section id="td3-behavior-cloning-fujimoto2021minimalist" class="level2">
-<h2 class="anchored" data-anchor-id="td3-behavior-cloning-fujimoto2021minimalist">TD3 + Behavior Cloning <span class="citation" data-cites="fujimoto2021minimalist">Fujimoto and Gu (<a href="#ref-fujimoto2021minimalist" role="doc-biblioref">2021</a>)</span></h2>
-<p>Behavior cloning is a widely used techniques to for agents to learn from an expert i.e.&nbsp;trying to understand based on an expert agent’s trajectory. This paper suggests using Behavior Cloning with some adjustments over an existing RL algorithm like TD3 to learn in from a static dataset of trajectories.</p>
-
-
-
-</section>
-</section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-fujimoto2021minimalist" class="csl-entry" role="listitem">
-Fujimoto, Scott, and Shixiang Shane Gu. 2021. <span>“A Minimalist Approach to Offline Reinforcement Learning.”</span> <em>Advances in Neural Information Processing Systems</em> 34: 20132–45.
 </div>
-<div id="ref-kumar2020conservative" class="csl-entry" role="listitem">
-Kumar, Aviral, Aurick Zhou, George Tucker, and Sergey Levine. 2020. <span>“Conservative q-Learning for Offline Reinforcement Learning.”</span> <em>Advances in Neural Information Processing Systems</em> 33: 1179–91.
-</div>
-<div id="ref-sutton2018reinforcement" class="csl-entry" role="listitem">
-Sutton, Richard S, and Andrew G Barto. 2018. <em>Reinforcement Learning: An Introduction</em>. MIT press.
-</div>
-</div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{balloli2023,
+<section id="preparing-your-data-what-goes-into-training-a-traditional-cbm" class="level2">
+<h2 class="anchored" data-anchor-id="preparing-your-data-what-goes-into-training-a-traditional-cbm">Preparing your data: what goes into training a traditional CBM</h2>
+<ol type="1">
+<li>Pre-defined list concepts. Let’s take the example of the CUB dataset. Some concepts in this dataset include <code>black undertail color</code>, <code>yellow throat color</code>, etc.</li>
+<li>Annotating these pre-defined list of concepts and the associated class label with it.</li>
+<li>That’s it!</li>
+</ol>
+</section>
+<section id="concepts-you-need-to-build-your-own-cbm" class="level2">
+<h2 class="anchored" data-anchor-id="concepts-you-need-to-build-your-own-cbm">Concepts you need to build your own CBM</h2>
+<p>Yes, very much intended. Moving on, here are the concepts you need to build your own CBM:</p>
+<ol type="1">
+<li>Concept Predictor Model: depending on your modality, it can be pre-trained encoders, pre-trained image classifiers, etc. Pre-training does help a lot as evidenced by tons of literature in the deep learning community over the past 7 years maybe. <strong>The key part is here the activation function used to predict the concepts</strong>: while <code>sigmoid</code> might seem like the obvious choice, <code>sigmoid</code> is shown to squash the activations a lot and you end up with not so great performance. <code>ReLUs</code> on the other hand perform well but their intervention needs a special computation. The intuition here is if you were to intervene in <code>sigmoid</code>, you’d either set the concept close to <code>zero</code> if it is <code>absent</code> or close to <code>one</code> if it is <code>present</code>, which is not the case for ReLUs simply because the maximum activation you could achieve here is pretty high. Therefore, the authors suggest computing the 95th and 5th percentile of the activations for each of the concept to indicate presence and absence respectively and set the intervention values the same when deploying.</li>
+<li>A simple neural network or actually any machine learning model you fancy that takes in these inputs and predicts the final label or value depending on classification or regression.</li>
+</ol>
+<!-- # Catching up to some important works in this field
+
+**Concept Embedding Models** 
+
+**Probabilistic CBMs**
+
+**Efficient Intervenable Models**
+
+**Label-free CBMs** -->
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{balloli2024,
   author = {Balloli, Vaibhav},
-  title = {Offline {Reinforcement} {Learning}},
-  date = {2023-01-28},
-  url = {https://vballoli.github.io/research-recap//posts/offline-rl},
+  title = {Concept {Bottleneck} {Models}},
+  date = {2024-01-06},
+  url = {https://vballoli.github.io/research-recap//posts/concept-models},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-balloli2023" class="csl-entry quarto-appendix-citeas" role="listitem">
-Balloli, Vaibhav. 2023. <span>“Offline Reinforcement Learning.”</span>
-January 28, 2023. <a href="https://vballoli.github.io/research-recap//posts/offline-rl">https://vballoli.github.io/research-recap//posts/offline-rl</a>.
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-balloli2024" class="csl-entry quarto-appendix-citeas" role="listitem">
+Balloli, Vaibhav. 2024. <span>“Concept Bottleneck Models.”</span>
+January 6, 2024. <a href="https://vballoli.github.io/research-recap//posts/concept-models">https://vballoli.github.io/research-recap//posts/concept-models</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
